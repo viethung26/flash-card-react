@@ -1,0 +1,19 @@
+#word {
+	display: inline-block;
+	width: 200px;
+}
+#prev {
+	position: absolute;
+	top: 50%;
+	transform: translate(5%,-50%);
+}
+#next {
+	position: absolute;
+	top: 50%;
+	right: 0%;
+	transform: translate(-5%,-50%);
+}
+.inline {
+	display: inline-block;
+	position: relative;
+}

@@ -1,0 +1,14 @@
+.avatar {
+	display: inline-block;
+	border-radius: 50%;
+	border: solid 3px #007FEB;
+	overflow: hidden;
+	height: 100px;
+}
+#avatar {
+	position: relative;
+	top: -20px;
+}
+html{
+	font-size: 1em;
+}
