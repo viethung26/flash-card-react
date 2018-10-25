@@ -4,8 +4,8 @@ class Package extends Component {
 	render() {
 		return (
 			<div className="text-left ml-4 mr-4">
-				<select classname="" name="display" id="all">
-					<option selected value="all">All</option>
+				<select className="" name="display" value="all" onChange={event=>this.value=event.target.value}>
+					<option value="all">All</option>
 					<option value="favorite">Favorite</option>
 				</select>
 				<table className="table mt-4">

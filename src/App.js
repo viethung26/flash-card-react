@@ -28,7 +28,7 @@ class App extends Component {
                     <Card/>
                 </div>
                 <button className="btn btn-primary fixed-bottom" 
-                onClick={()=>this.setState({new: true})}><i class="material-icons">add_to_photos</i> New Package</button>
+                onClick={()=>this.setState({new: true})}><i className="material-icons">add_to_photos</i> New Package</button>
                 <Modal visibility={this.state.new} onCreate={this.newPackage}/>
             </div>);
     }

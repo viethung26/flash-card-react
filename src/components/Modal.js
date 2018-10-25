@@ -13,7 +13,7 @@ class Modal extends Component {
 		const visibility = this.props.visibility ? "visible" : "invisible";
 		return (<div className={visibility + " mask fixed-top w-100 h-100"}>
 			<div className="content bg-success d-inline p-3 rounded">
-				<h6 className="text-light"><i class="material-icons">add_to_photos</i> New Package</h6>
+				<h6 className="text-light"><i className="material-icons">add_to_photos</i> New Package</h6>
 				<hr/>
 				<input className="form-control mb-2" type="text" value={this.state.name} onChange={event=>this.setState({name: event.target.value})}/>
 				<span className="">

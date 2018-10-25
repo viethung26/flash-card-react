@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 
 class OtherCards extends Component {
 	other() {
-		const arr = [];
-		for(let i=0; i<50; i++) arr.push(<a href="#" className="mr-2 mb-2 border border-warning"><img src="dog.jpg" alt="other" height="80px"/></a>);
-		return arr;
+		const SET = [];
+		const CARDS = this.props.cards;
+		for(let i=0; i<CARDS.length; i++) SET.push(<button key={i} onClick={()=>this.props.onChoose(i)}
+			className="btn btn-light mr-2 mb-2 border border-warning">
+			{CARDS[i].name}</button>);
+		return SET;
 	}
 	render() {
 		return (
