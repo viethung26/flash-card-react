@@ -7,3 +7,6 @@ ul li {
 	display: inline-block;
 	margin: 5px;
 }
+.menu {
+	left: 50%;
+}

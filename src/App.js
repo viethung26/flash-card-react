@@ -14,7 +14,7 @@ import Modal from './components/Modal';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {packages:[], new: true};
+        this.state = {packages:[], new: false};
         this.newPackage = this.newPackage.bind(this);
     }
 
