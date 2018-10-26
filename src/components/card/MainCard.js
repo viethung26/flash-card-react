@@ -3,13 +3,13 @@ import './MainCard.css';
 
 class MainCard extends Component {
 	render() {
-		const Empty = {name: "empty", content: "empty"};
+		const Empty = {name: "empty", content: "empty", id: 0, repeat: 0};
 		const CARD = this.props.card || Empty;
 		return (
 			<div className="h-100">
 				<div className="mb-2">
 					<div className="bg-light border border-primary mr-2 text-center rounded" id="word">{CARD.name}</div>
-					<span className="badge badge-light ">20</span>
+					<span className="badge badge-light ">{CARD.repeat}</span>
 				</div>
 				<div className="mb-2 bg-dark inline rounded">
 					<button className="btn btn-outline-dark" id="prev" onClick={() => this.props.onChoose(CARD.id-1)}><i className="fa fa-chevron-circle-left"></i></button>

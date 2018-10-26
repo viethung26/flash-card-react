@@ -10,8 +10,6 @@ class Package extends Component {
 				</select>
 				<table className="table mt-4">
 					<tbody>
-						<tr><td><a href="#"><i className="fa fa-heart"></i></a></td>
-						<td><a href="#">English</a></td></tr>
 						{this.init()}
 					</tbody>
 				</table>
@@ -22,8 +20,8 @@ class Package extends Component {
 		const packages = this.props.list;
 		const list = [];
 		for(let pack of packages) {
-			list.push(<tr><td><a href="#"><i className="fa fa-heart-o"></i></a></td>
-						<td><a href="#">{pack.name}</a></td></tr>);
+			list.push(<tr key={pack.id} className="item" onClick={()=>this.props.onChoose(pack.id)}><td><i className={pack.favor ? "fa fa-heart text-danger" : "fa fa-heart-o" }></i></td>
+						<td>{pack.name}</td></tr>);
 		}
 		return list;
 	}

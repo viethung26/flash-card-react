@@ -8,7 +8,7 @@ class List extends Component {
 			<div className="list bg-white h-100 pt-2">
 				<Header/>
 				<hr/>
-				<Package list={this.props.list}/>
+				<Package list={this.props.list} onChoose={this.props.onChoosePack}/>
 				
 			</div>
 			
