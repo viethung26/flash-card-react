@@ -16,11 +16,22 @@ class App extends Component {
         this.state = {packages:[{name: "name", cards: [{id: 0, name: "hung", content: "21", repeat: 0}], favor: false, id: 0 }], new: false, current: null};
         this.newPackage = this.newPackage.bind(this);
     }
+    componentWillMount() {
+        if(localStorage.getItem("packages")) {
+            alert(1);
+            const packages = JSON.parse(localStorage.getItem("packages"));
+            this.setState({packages});
+        }
+    }
     componentDidMount() {
         if(this.state.packages.length!==0) this.setState({current: 0});
     }
     componentDidUpdate() {
         if(this.state.packages.length!==0 && this.state.current===null) this.setState({current: 0});
+    }
+
+    componentWillUnmout() {
+        localStorage.setItem("test2", "testt");
     }
 
     render() {
@@ -60,6 +71,7 @@ class App extends Component {
             card.repeat = 0;
             pack.cards.push(card);
             this.setState({packages});
+            localStorage.setItem("packages", JSON.stringify(packages));
         }
     }
 }
