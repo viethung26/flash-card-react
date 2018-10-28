@@ -27,11 +27,12 @@ class Card extends Component {
 					<li>{SIZE}</li>
 				</ul>
 				<div className="row">
-					<div className="col-lg-5"><MainCard card={this.props.pack.cards[this.state.current]} onChoose={this.onChoose}/></div>
+					<div className="col-lg-5"><MainCard card={this.props.pack.cards.length !== 0 ? this.props.pack.cards[this.state.current] : null} onChoose={this.onChoose}/></div>
 					<div className="col-lg-7"><OtherCards cards={this.props.pack.cards} onChoose={this.onChoose}/></div>
 				</div>
 				<div className="menu fixed-top">
-					<button className="btn btn-success" onClick={()=>this.setState({new: true})}><i className="fa fa-file-o"></i></button>
+					<button className="btn btn-success mr-2" title="Add card" onClick={()=>this.setState({new: true})}><i className="fa fa-file-o"></i></button>
+					<button className="btn btn-success" title="Delete package" onClick={()=>this.props.delete(PACK.id)}><i className="fa fa-trash-o"></i></button>
 				</div>
 				<Modal visibility={this.state.new} onCreate={this.newCard}/>
 			</div>

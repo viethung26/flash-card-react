@@ -3,6 +3,7 @@ import './App.css';
 import Loadable from 'react-loadable';
 import List from './components/List';
 import Modal from './components/Modal';
+import RandomString from 'random-string';
 
 const LoadableCard = Loadable({
     loader: () =>import('./components/Card'),
@@ -18,7 +19,6 @@ class App extends Component {
     }
     componentWillMount() {
         if(localStorage.getItem("packages")) {
-            alert(1);
             const packages = JSON.parse(localStorage.getItem("packages"));
             this.setState({packages});
         }
@@ -28,10 +28,7 @@ class App extends Component {
     }
     componentDidUpdate() {
         if(this.state.packages.length!==0 && this.state.current===null) this.setState({current: 0});
-    }
-
-    componentWillUnmout() {
-        localStorage.setItem("test2", "testt");
+        localStorage.setItem("packages", JSON.stringify(this.state.packages));
     }
 
     render() {
@@ -41,7 +38,9 @@ class App extends Component {
                     <List list={this.state.packages} onChoosePack={this.choosePack}/>
                 </div>
                 <div className="col-lg-10 col-md-8">
-                    {this.state.current!==null ? <LoadableCard pack={this.state.packages[this.state.current]} current={this.state.current} newCard={this.newCard}/>: ""}
+                    {this.state.current!==null ? <LoadableCard pack={this.state.packages[this.state.current]} 
+                    current={this.state.current} newCard={this.newCard} 
+                    delete={this.deletePack}/>: ""}
                 </div>
                 <button className="btn btn-primary fixed-bottom" 
                 onClick={()=>this.setState({new: true})}><i className="material-icons">add_to_photos</i> New Package</button>
@@ -52,7 +51,7 @@ class App extends Component {
     newPackage(name) {
         if(name) {
             const packages = this.state.packages;
-            packages.push({name: name, cards: [], favor: false, id: packages.length });
+            packages.push({name: name, cards: [], favor: false, id: RandomString({length: 10})});
             this.setState({packages});
         }
         this.setState({new: false});
@@ -60,7 +59,8 @@ class App extends Component {
     }
 
     choosePack = id => {
-        this.setState({current: id});
+        const current = this.state.packages.findIndex(val => val.id === id);
+        this.setState({current});
     }
 
     newCard = card => {
@@ -71,8 +71,16 @@ class App extends Component {
             card.repeat = 0;
             pack.cards.push(card);
             this.setState({packages});
-            localStorage.setItem("packages", JSON.stringify(packages));
+            // localStorage.setItem("packages", JSON.stringify(packages));
         }
+    }
+
+    deletePack = id => {
+        const {packages} = this.state;
+        const index = packages.findIndex(val => val.id === id);
+        packages.splice(index, 1);
+        this.setState({packages, current: null});
+
     }
 }
 
