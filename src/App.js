@@ -33,14 +33,17 @@ class App extends Component {
 
     render() {
         return (
-            <div className="row app">
+            <div className="row app" onKeyUp={this.handlePwdKeyUp} ref="PwdInput">
                 <div className="col-lg-2 col-md-4">
                     <List list={this.state.packages} onChoosePack={this.choosePack}/>
                 </div>
                 <div className="col-lg-10 col-md-8">
                     {this.state.current!==null ? <LoadableCard pack={this.state.packages[this.state.current]} 
-                    current={this.state.current} newCard={this.newCard} 
-                    delete={this.deletePack}/>: ""}
+                    current={this.state.current} 
+                    newCard={this.newCard} 
+                    deletePack={this.deletePack}
+                    updateCard={this.updateCard}
+                    deleteCard={this.deleteCard}/>: ""}
                 </div>
                 <button className="btn btn-primary fixed-bottom" 
                 onClick={()=>this.setState({new: true})}><i className="material-icons">add_to_photos</i> New Package</button>
@@ -58,6 +61,7 @@ class App extends Component {
         
     }
 
+
     choosePack = id => {
         const current = this.state.packages.findIndex(val => val.id === id);
         this.setState({current});
@@ -67,12 +71,19 @@ class App extends Component {
         const {packages, current} = this.state; 
         const pack = packages[current];
         if(card) {
-            card.id = pack.cards.length;
+            card.id = RandomString({lengh: 20});
             card.repeat = 0;
             pack.cards.push(card);
             this.setState({packages});
             // localStorage.setItem("packages", JSON.stringify(packages));
         }
+    }
+
+    updateCard = card => {
+        const {packages, current} = this.state;
+        const index = packages[current].cards.findIndex(val => val.id === card.id);
+        packages[current].cards[index] = card;
+        this.setState({packages});
     }
 
     deletePack = id => {
@@ -81,6 +92,14 @@ class App extends Component {
         packages.splice(index, 1);
         this.setState({packages, current: null});
 
+    }
+
+    deleteCard = id => {
+        const {packages, current} = this.state;
+        let pack = packages[current].cards;
+        const index = pack.findIndex(val => val.id === id);
+        pack.splice(index, 1);
+        this.setState({packages}); 
     }
 }
 
